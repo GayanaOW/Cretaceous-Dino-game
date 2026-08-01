@@ -1,3 +1,68 @@
 [gd_scene format=3 uid="uid://dv60j7ge1j0vc"]
 
-[node name="Node3D" type="Node3D" unique_id=1376114856]
+[ext_resource type="Script" uid="uid://bfov51n7h5o4f" path="res://scripts/player.gd" id="1_2x7fr"]
+[ext_resource type="Script" uid="uid://c6k57rm74pyc0" path="res://scripts/test_enemy.gd" id="2_swvrr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xrivr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_13qdw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b1lj4"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_njqwk"]
+
+[node name="TestLevel" type="Node3D" unique_id=1376114856]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1314864971]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1518857498]
+shape = SubResource("BoxShape3D_xrivr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1204001129]
+mesh = SubResource("BoxMesh_xrivr")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=828196443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("1_2x7fr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1112450089]
+shape = SubResource("CapsuleShape3D_xrivr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=491857881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4174254, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_xrivr")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1113554487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+h_offset = 0.6
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1664459547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95482874)
+mesh = SubResource("BoxMesh_13qdw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=231425026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5734754, 0, 0)
+mesh = SubResource("BoxMesh_b1lj4")
+
+[node name="TestEnemy" type="CharacterBody3D" parent="." unique_id=1633995619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
+script = ExtResource("2_swvrr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestEnemy" unique_id=88622742]
+shape = SubResource("BoxShape3D_13qdw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestEnemy" unique_id=1483779476]
+mesh = SubResource("BoxMesh_njqwk")
