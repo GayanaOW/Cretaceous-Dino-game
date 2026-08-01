@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cet1pa42etvin"]
+
+[ext_resource type="Script" uid="uid://eng42a1ho752" path="res://scripts/raptor.gd" id="1_4fohi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_13qdw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1lj4"]
+albedo_color = Color(0.8356766, 0, 0.1590468, 1)
+
+[node name="Raptor" type="CharacterBody3D" unique_id=1214286511]
+script = ExtResource("1_4fohi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=476631841]
+shape = SubResource("CapsuleShape3D_xrivr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=299455030]
+mesh = SubResource("CapsuleMesh_13qdw")
+surface_material_override/0 = SubResource("StandardMaterial3D_b1lj4")

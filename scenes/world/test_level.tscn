@@ -2,12 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bfov51n7h5o4f" path="res://scripts/player.gd" id="1_2x7fr"]
 [ext_resource type="Script" uid="uid://c6k57rm74pyc0" path="res://scripts/test_enemy.gd" id="2_swvrr"]
+[ext_resource type="PackedScene" uid="uid://cet1pa42etvin" path="res://scenes/dinosaurs/raptor.tscn" id="3_7lndr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
 size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi6ju"]
+albedo_color = Color(0.018777622, 0.015046428, 0.022999229, 0.42352942)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
 
@@ -23,6 +27,18 @@ size = Vector3(1.5, 1.5, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_njqwk"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7f2x3"]
+albedo_color = Color(0.50777596, 0, 0.0522568, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njqwk"]
+
+[sub_resource type="Sky" id="Sky_b1lj4"]
+sky_material = SubResource("ProceduralSkyMaterial_njqwk")
+
+[sub_resource type="Environment" id="Environment_13qdw"]
+background_mode = 2
+sky = SubResource("Sky_b1lj4")
+
 [node name="TestLevel" type="Node3D" unique_id=1376114856]
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1314864971]
@@ -32,6 +48,7 @@ shape = SubResource("BoxShape3D_xrivr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1204001129]
 mesh = SubResource("BoxMesh_xrivr")
+surface_material_override/0 = SubResource("StandardMaterial3D_wi6ju")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=828196443]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -52,6 +69,7 @@ current = true
 
 [node name="Object1" type="MeshInstance3D" parent="." unique_id=1664459547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95482874)
+gi_lightmap_texel_scale = 1.1867
 mesh = SubResource("BoxMesh_13qdw")
 
 [node name="Object2" type="MeshInstance3D" parent="." unique_id=231425026]
@@ -67,3 +85,12 @@ shape = SubResource("BoxShape3D_13qdw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestEnemy" unique_id=1483779476]
 mesh = SubResource("BoxMesh_njqwk")
+surface_material_override/0 = SubResource("StandardMaterial3D_7f2x3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2103130682]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=975973988]
+environment = SubResource("Environment_13qdw")
+
+[node name="Raptor" parent="." unique_id=1214286511 instance=ExtResource("3_7lndr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.5, -8)
