@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cet1pa42etvin" path="res://scenes/dinosaurs/raptor.tscn" id="3_7lndr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
-size = Vector3(20, 1, 20)
+size = Vector3(40, 1, 40)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
-size = Vector3(20, 1, 20)
+size = Vector3(40, 1, 40)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi6ju"]
 albedo_color = Color(0.018777622, 0.015046428, 0.022999229, 0.42352942)
@@ -92,5 +92,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7f2x3")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=975973988]
 environment = SubResource("Environment_13qdw")
 
+[node name="Raptor2" parent="." unique_id=301259362 instance=ExtResource("3_7lndr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.5, 1)
+
+[node name="Raptor3" parent="." unique_id=2033376548 instance=ExtResource("3_7lndr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 1)
+
 [node name="Raptor" parent="." unique_id=1214286511 instance=ExtResource("3_7lndr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.5, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.5, 1)
