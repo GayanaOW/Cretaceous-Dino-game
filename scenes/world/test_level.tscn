@@ -14,9 +14,10 @@ size = Vector3(20, 1, 20)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xrivr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_13qdw"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_b1lj4"]
-size = Vector3(2, 1, 2)
+size = Vector3(1.5, 1.5, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
 
@@ -49,11 +50,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 h_offset = 0.6
 current = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1664459547]
+[node name="Object1" type="MeshInstance3D" parent="." unique_id=1664459547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95482874)
 mesh = SubResource("BoxMesh_13qdw")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=231425026]
+[node name="Object2" type="MeshInstance3D" parent="." unique_id=231425026]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5734754, 0, 0)
 mesh = SubResource("BoxMesh_b1lj4")
 
