@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cet1pa42etvin" path="res://scenes/dinosaurs/raptor.tscn" id="3_7lndr"]
 [ext_resource type="Script" uid="uid://l7dedjhiu1en" path="res://scripts/inventory.gd" id="3_32mv2"]
 [ext_resource type="PackedScene" uid="uid://bdewswpy83re1" path="res://scenes/world/wood_resource.tscn" id="6_1rplp"]
+[ext_resource type="PackedScene" uid="uid://c0m6uusuvgxdn" path="res://scenes/ui/hud.tscn" id="8_gb1m8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(40, 1, 40)
@@ -124,3 +125,7 @@ script = ExtResource("2_7gmxp")
 
 [node name="WoodResource" parent="." unique_id=751302924 instance=ExtResource("6_1rplp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.441814, 1.717102, 16.59032)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2135524217]
+
+[node name="HUD" parent="CanvasLayer" unique_id=364059218 instance=ExtResource("8_gb1m8")]
