@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c0m6uusuvgxdn"]
+
+[ext_resource type="Script" uid="uid://bonqedsnhgqaw" path="res://scripts/hud.gd" id="1_0mwgc"]
+
+[node name="HUD" type="Control" unique_id=364059218]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0mwgc")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1911993212]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = 47.0
+fill_mode = 1
+
+[node name="WoodLabel" type="Label" parent="." unique_id=71648191]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 55.0
+offset_right = 92.0
+offset_bottom = 104.0
+text = "Wood = 0
+"
