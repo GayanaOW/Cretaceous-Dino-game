@@ -12,6 +12,9 @@ const RECOVERY_HEALTH = 50.0
 
 var is_knocked_out: bool = false
 
+const INTERACT_RANGE = 3.0
+var wood_count: int = 0  # temporary — real inventory comes in ticket #11
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var camera: Camera3D = $Camera3D
@@ -42,6 +45,25 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 	elif event.is_action_pressed("attack"):
 		_try_attack()
+	elif event.is_action_pressed("interact"):
+		_try_interact()
+
+func _try_interact():
+	var space_state = get_world_3d().direct_space_state
+	var from = camera.global_position
+	var to = from + (-camera.global_transform.basis.z * INTERACT_RANGE)
+
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [self]
+	var result = space_state.intersect_ray(query)
+
+	if result:
+		var hit_object = result.collider
+		if hit_object.has_method("gather"):
+			var amount = await hit_object.gather()
+			if amount > 0:
+				wood_count += amount
+				print("Gathered wood! Total: ", wood_count)
 		
 func _try_attack():
 	var space_state = get_world_3d().direct_space_state

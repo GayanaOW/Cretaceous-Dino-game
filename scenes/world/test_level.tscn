@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bvk8xh45j4gym" path="res://scripts/health.gd" id="2_7gmxp"]
 [ext_resource type="Script" uid="uid://c6k57rm74pyc0" path="res://scripts/test_enemy.gd" id="2_swvrr"]
 [ext_resource type="PackedScene" uid="uid://cet1pa42etvin" path="res://scenes/dinosaurs/raptor.tscn" id="3_7lndr"]
+[ext_resource type="PackedScene" uid="uid://bdewswpy83re1" path="res://scenes/world/wood_resource.tscn" id="6_1rplp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(40, 1, 40)
@@ -113,3 +114,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.5, 1)
 
 [node name="Health" type="Node" parent="Raptor" unique_id=1459683192]
 script = ExtResource("2_7gmxp")
+
+[node name="WoodResource" parent="." unique_id=751302924 instance=ExtResource("6_1rplp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.441814, 1.717102, 16.59032)
