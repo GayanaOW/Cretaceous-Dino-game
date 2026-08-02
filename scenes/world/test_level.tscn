@@ -124,8 +124,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.5, 1)
 script = ExtResource("2_7gmxp")
 
 [node name="WoodResource" parent="." unique_id=751302924 instance=ExtResource("6_1rplp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.441814, 1.717102, 16.59032)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.717, 9)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2135524217]
 
 [node name="HUD" parent="CanvasLayer" unique_id=364059218 instance=ExtResource("8_gb1m8")]
+
+[editable path="WoodResource"]
