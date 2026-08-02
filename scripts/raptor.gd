@@ -8,6 +8,11 @@ const ATTACK_RANGE = 1.5
 const ALERT_DURATION = 0.5
 const PACK_ALERT_RADIUS = 15.0  # NEW: how far the "I see you!" call reaches
 
+const ATTACK_DAMAGE = 10.0
+const ATTACK_COOLDOWN = 1.0  # seconds between hits
+
+var attack_timer: float = 0.0
+
 signal spotted_player  # NEW: this raptor declares it CAN announce this event
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -16,12 +21,19 @@ var player: Node3D = null
 var alert_timer: float = 0.0
 var has_alerted_pack: bool = false  # NEW: so we only shout once per detection, not every frame
 
+@onready var health: Health = $Health
+
 func _ready():
 	player = get_tree().get_root().find_child("Player", true, false)
 	add_to_group("raptors")  # NEW: joins the "raptors" group so others can find it
 
 	# NEW: connect to every other raptor's signal, so when THEY spot the player, this one reacts too
 	call_deferred("_connect_to_pack")
+	
+	health.depleted.connect(_on_raptor_defeated)
+
+func _on_raptor_defeated():
+	queue_free()  # simplest MVP behavior: raptor disappears when defeated
 
 func _connect_to_pack():
 	var pack = get_tree().get_nodes_in_group("raptors")
@@ -90,3 +102,12 @@ func _act_on_state(distance: float, delta: float) -> void:
 		State.ATTACK:
 			velocity.x = 0
 			velocity.z = 0
+			attack_timer -= delta
+			if attack_timer <= 0.0:
+				_attack_player()
+				attack_timer = ATTACK_COOLDOWN
+
+func _attack_player() -> void:
+	var player_health = player.get_node_or_null("Health")
+	if player_health:
+		player_health.take_damage(ATTACK_DAMAGE)

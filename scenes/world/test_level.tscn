@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dv60j7ge1j0vc"]
 
 [ext_resource type="Script" uid="uid://bfov51n7h5o4f" path="res://scripts/player.gd" id="1_2x7fr"]
+[ext_resource type="Script" uid="uid://bvk8xh45j4gym" path="res://scripts/health.gd" id="2_7gmxp"]
 [ext_resource type="Script" uid="uid://c6k57rm74pyc0" path="res://scripts/test_enemy.gd" id="2_swvrr"]
 [ext_resource type="PackedScene" uid="uid://cet1pa42etvin" path="res://scenes/dinosaurs/raptor.tscn" id="3_7lndr"]
+[ext_resource type="PackedScene" uid="uid://bdewswpy83re1" path="res://scenes/world/wood_resource.tscn" id="6_1rplp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(40, 1, 40)
@@ -67,6 +69,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 h_offset = 0.6
 current = true
 
+[node name="Health" type="Node" parent="Player" unique_id=379420427]
+script = ExtResource("2_7gmxp")
+
 [node name="Object1" type="MeshInstance3D" parent="." unique_id=1664459547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95482874)
 gi_lightmap_texel_scale = 1.1867
@@ -95,8 +100,20 @@ environment = SubResource("Environment_13qdw")
 [node name="Raptor2" parent="." unique_id=301259362 instance=ExtResource("3_7lndr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.5, 1)
 
+[node name="Health" type="Node" parent="Raptor2" unique_id=62142362]
+script = ExtResource("2_7gmxp")
+
 [node name="Raptor3" parent="." unique_id=2033376548 instance=ExtResource("3_7lndr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 1)
 
+[node name="Health" type="Node" parent="Raptor3" unique_id=355754851]
+script = ExtResource("2_7gmxp")
+
 [node name="Raptor" parent="." unique_id=1214286511 instance=ExtResource("3_7lndr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.5, 1)
+
+[node name="Health" type="Node" parent="Raptor" unique_id=1459683192]
+script = ExtResource("2_7gmxp")
+
+[node name="WoodResource" parent="." unique_id=751302924 instance=ExtResource("6_1rplp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.441814, 1.717102, 16.59032)
