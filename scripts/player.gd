@@ -28,6 +28,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	health.depleted.connect(_on_knocked_out)
+	await get_tree().physics_frame  # let physics fully initialize before allowing raycasts
 
 func _on_knocked_out():
 	if is_knocked_out:
@@ -63,6 +64,7 @@ func _try_interact():
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
+	print("interact raycast result: ", result)  # DEBUG
 
 	if result:
 		var hit_object = result.collider
