@@ -15,6 +15,11 @@ var is_knocked_out: bool = false
 const INTERACT_RANGE = 3.0
 @onready var inventory = $Inventory
 
+const SPEAR_WOOD_COST = 5
+const SPEAR_ATTACK_DAMAGE = 40.0
+
+var has_spear: bool = false
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var camera: Camera3D = $Camera3D
@@ -47,6 +52,8 @@ func _unhandled_input(event):
 		_try_attack()
 	elif event.is_action_pressed("interact"):
 		_try_interact()
+	elif event.is_action_pressed("craft_spear"):
+		_try_craft_spear()
 
 func _try_interact():
 	var space_state = get_world_3d().direct_space_state
@@ -78,8 +85,19 @@ func _try_attack():
 		var hit_object = result.collider
 		var health_node = hit_object.get_node_or_null("Health")
 		if health_node:
-			health_node.take_damage(ATTACK_DAMAGE)
-			print("Hit ", hit_object.name, " for ", ATTACK_DAMAGE, " damage")
+			var damage = SPEAR_ATTACK_DAMAGE if has_spear else ATTACK_DAMAGE
+			health_node.take_damage(damage)
+			print("Hit ", hit_object.name, " for ", damage, " damage")
+			
+func _try_craft_spear():
+	if has_spear:
+		print("Already have a spear")
+		return
+	if inventory.remove_item("wood", SPEAR_WOOD_COST):
+		has_spear = true
+		print("Crafted a spear!")
+	else:
+		print("Not enough wood — need ", SPEAR_WOOD_COST)
 
 func _physics_process(delta):
 	if is_knocked_out:
