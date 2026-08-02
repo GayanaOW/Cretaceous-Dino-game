@@ -13,7 +13,7 @@ const RECOVERY_HEALTH = 50.0
 var is_knocked_out: bool = false
 
 const INTERACT_RANGE = 3.0
-var wood_count: int = 0  # temporary — real inventory comes in ticket #11
+@onready var inventory = $Inventory
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -62,8 +62,8 @@ func _try_interact():
 		if hit_object.has_method("gather"):
 			var amount = await hit_object.gather()
 			if amount > 0:
-				wood_count += amount
-				print("Gathered wood! Total: ", wood_count)
+				inventory.add_item("wood", amount)
+				print("Gathered wood! Total: ", inventory.get_count("wood"))
 		
 func _try_attack():
 	var space_state = get_world_3d().direct_space_state
