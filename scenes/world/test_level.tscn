@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bvk8xh45j4gym" path="res://scripts/health.gd" id="2_7gmxp"]
 [ext_resource type="Script" uid="uid://c6k57rm74pyc0" path="res://scripts/test_enemy.gd" id="2_swvrr"]
 [ext_resource type="PackedScene" uid="uid://cet1pa42etvin" path="res://scenes/dinosaurs/raptor.tscn" id="3_7lndr"]
+[ext_resource type="Script" uid="uid://l7dedjhiu1en" path="res://scripts/inventory.gd" id="3_32mv2"]
 [ext_resource type="PackedScene" uid="uid://bdewswpy83re1" path="res://scenes/world/wood_resource.tscn" id="6_1rplp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
@@ -71,6 +72,9 @@ current = true
 
 [node name="Health" type="Node" parent="Player" unique_id=379420427]
 script = ExtResource("2_7gmxp")
+
+[node name="Inventory" type="Node" parent="Player" unique_id=1631327890]
+script = ExtResource("3_32mv2")
 
 [node name="Object1" type="MeshInstance3D" parent="." unique_id=1664459547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95482874)
