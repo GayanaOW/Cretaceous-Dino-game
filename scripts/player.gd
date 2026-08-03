@@ -11,6 +11,8 @@ const KNOCKOUT_DURATION = 3.0
 const RECOVERY_HEALTH = 50.0
 
 var is_knocked_out: bool = false
+signal knocked_out
+signal recovered
 
 const INTERACT_RANGE = 3.0
 @onready var inventory = $Inventory
@@ -32,15 +34,15 @@ func _ready():
 
 func _on_knocked_out():
 	if is_knocked_out:
-		return  # prevent re-triggering while already down
+		return
 	is_knocked_out = true
-
-	# TODO (ticket #10/#11): scatter actual inventory items here once inventory exists
+	knocked_out.emit()
 
 	await get_tree().create_timer(KNOCKOUT_DURATION).timeout
 
 	health.current_health = RECOVERY_HEALTH
 	is_knocked_out = false
+	recovered.emit()
 	
 func _unhandled_input(event):
 	if is_knocked_out:
