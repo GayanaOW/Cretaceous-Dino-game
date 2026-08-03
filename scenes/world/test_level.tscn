@@ -9,24 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bdewswpy83re1" path="res://scenes/world/wood_resource.tscn" id="6_1rplp"]
 [ext_resource type="PackedScene" uid="uid://c0m6uusuvgxdn" path="res://scenes/ui/hud.tscn" id="8_gb1m8"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
-size = Vector3(40, 1, 40)
-
-[sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
-size = Vector3(40, 1, 40)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi6ju"]
-albedo_color = Color(0.018777622, 0.015046428, 0.022999229, 0.42352942)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xrivr"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_13qdw"]
-size = Vector3(2, 2, 2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_b1lj4"]
-size = Vector3(1.5, 1.5, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
 
@@ -44,16 +29,28 @@ sky_material = SubResource("ProceduralSkyMaterial_njqwk")
 background_mode = 2
 sky = SubResource("Sky_b1lj4")
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_xrivr"]
+vertices = PackedVector3Array(-8.75, 1, 8, -7.25, 1, 8, -1.5, 1, 2.25, -1.5, 1, -0.5, -19.5, 1, 9, -9, 1, 9, 0.25, 1, -19.5, -19.5, 1, -19.5, 0.25, 1, -0.75, 1.5, 1, -0.75, 1.75, 1.25, 0.75, 19.5, 1, 0.75, 19.5, 1, -19.5, -0.5, 3, 0.25, -0.5, 3, 1.5, 0.75, 3, 1.5, 0.75, 3, 0.25, -7, 1, 9.75, 1.5, 1, 2.5, -8, 1, 10, -8, 1, 19.5, 19.5, 1, 19.5, -9, 1, 9.75, -19.5, 1, 19.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(0, 5, 4), PackedInt32Array(0, 4, 3), PackedInt32Array(3, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(6, 8, 3), PackedInt32Array(10, 9, 11), PackedInt32Array(11, 9, 12), PackedInt32Array(12, 9, 6), PackedInt32Array(9, 8, 6), PackedInt32Array(16, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(1, 2, 17), PackedInt32Array(17, 2, 18), PackedInt32Array(20, 19, 17), PackedInt32Array(17, 18, 20), PackedInt32Array(20, 18, 11), PackedInt32Array(20, 11, 21), PackedInt32Array(18, 10, 11), PackedInt32Array(19, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(22, 23, 4), PackedInt32Array(4, 5, 22)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b1lj4"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gb1m8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b1lj4"]
+size = Vector3(1.5, 1.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(40, 1, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
+size = Vector3(40, 1, 40)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi6ju"]
+albedo_color = Color(0.22352941, 0.38431373, 0, 0.42352942)
+
 [node name="TestLevel" type="Node3D" unique_id=1376114856]
-
-[node name="Floor" type="StaticBody3D" parent="." unique_id=1314864971]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1518857498]
-shape = SubResource("BoxShape3D_xrivr")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1204001129]
-mesh = SubResource("BoxMesh_xrivr")
-surface_material_override/0 = SubResource("StandardMaterial3D_wi6ju")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=828196443]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -77,15 +74,6 @@ script = ExtResource("2_7gmxp")
 
 [node name="Inventory" type="Node" parent="Player" unique_id=1631327890]
 script = ExtResource("3_32mv2")
-
-[node name="Object1" type="MeshInstance3D" parent="." unique_id=1664459547]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95482874)
-gi_lightmap_texel_scale = 1.1867
-mesh = SubResource("BoxMesh_13qdw")
-
-[node name="Object2" type="MeshInstance3D" parent="." unique_id=231425026]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5734754, 0, 0)
-mesh = SubResource("BoxMesh_b1lj4")
 
 [node name="TestEnemy" type="CharacterBody3D" parent="." unique_id=1633995619]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
@@ -123,11 +111,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.5, 1)
 [node name="Health" type="Node" parent="Raptor" unique_id=1459683192]
 script = ExtResource("2_7gmxp")
 
-[node name="WoodResource" parent="." unique_id=751302924 instance=ExtResource("6_1rplp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.717, 9)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2135524217]
 
 [node name="HUD" parent="CanvasLayer" unique_id=364059218 instance=ExtResource("8_gb1m8")]
 
-[editable path="WoodResource"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1974974843]
+navigation_mesh = SubResource("NavigationMesh_xrivr")
+
+[node name="Object1" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1742481953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.955)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Object1" unique_id=833752421]
+shape = SubResource("BoxShape3D_b1lj4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Object1" unique_id=687770497]
+mesh = SubResource("BoxMesh_gb1m8")
+
+[node name="WoodResource" parent="NavigationRegion3D" unique_id=751302924 instance=ExtResource("6_1rplp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.717, 9)
+
+[node name="Object2" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=231425026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5734754, 0, 0)
+mesh = SubResource("BoxMesh_b1lj4")
+
+[node name="Floor" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1314864971]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor" unique_id=1518857498]
+shape = SubResource("BoxShape3D_xrivr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1204001129]
+mesh = SubResource("BoxMesh_xrivr")
+surface_material_override/0 = SubResource("StandardMaterial3D_wi6ju")
+
+[editable path="NavigationRegion3D/WoodResource"]
