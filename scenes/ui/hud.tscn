@@ -1,6 +1,31 @@
 [gd_scene format=3 uid="uid://c0m6uusuvgxdn"]
 
 [ext_resource type="Script" uid="uid://bonqedsnhgqaw" path="res://scripts/hud.gd" id="1_0mwgc"]
+[ext_resource type="Texture2D" uid="uid://c5cd3veiricmf" path="res://assets/textures/wood-beam.svg" id="2_hqnrr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k461a"]
+bg_color = Color(0.16470589, 0.16470589, 0.16470589, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gb1m8"]
+bg_color = Color(0.7607843, 0.23137255, 0.23137255, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(0, 0, 0, 0.19215687)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
 
 [node name="HUD" type="Control" unique_id=364059218]
 layout_mode = 3
@@ -15,13 +40,39 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = 220.0
 offset_bottom = 47.0
+theme_override_styles/background = SubResource("StyleBoxFlat_k461a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gb1m8")
 fill_mode = 1
 
-[node name="WoodLabel" type="Label" parent="." unique_id=71648191]
+[node name="KnockoutOverlay" type="ColorRect" parent="." unique_id=279011977]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1114.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5, 0, 0, 0)
+
+[node name="WoodSlot" type="PanelContainer" parent="." unique_id=747653483]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-offset_left = 20.0
-offset_top = 55.0
-offset_right = 92.0
-offset_bottom = 104.0
-text = "Wood = 0
-"
+offset_left = 23.0
+offset_top = 555.0
+offset_right = 87.0
+offset_bottom = 619.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="CenterContainer" type="CenterContainer" parent="WoodSlot" unique_id=1391012444]
+layout_mode = 2
+
+[node name="WoodIcon" type="TextureRect" parent="WoodSlot/CenterContainer" unique_id=681585192]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_hqnrr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WoodCountLabel" type="Label" parent="WoodSlot" unique_id=1925245526]
+layout_mode = 2

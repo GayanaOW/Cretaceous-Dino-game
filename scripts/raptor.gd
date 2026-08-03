@@ -97,7 +97,6 @@ func _act_on_state(distance: float, delta: float) -> void:
 		State.CHASE:
 			nav_agent.target_position = player.global_position
 			var next_path_position = nav_agent.get_next_path_position()
-			print("state: CHASE, next_path_pos: ", next_path_position, " my_pos: ", global_position)  # DEBUG
 			var direction = (next_path_position - global_position)
 			direction.y = 0
 			direction = direction.normalized()

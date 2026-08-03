@@ -28,6 +28,13 @@ sky_material = SubResource("ProceduralSkyMaterial_njqwk")
 [sub_resource type="Environment" id="Environment_13qdw"]
 background_mode = 2
 sky = SubResource("Sky_b1lj4")
+ssao_enabled = true
+glow_enabled = true
+glow_intensity = 0.8
+fog_enabled = true
+fog_sun_scatter = 0.1
+fog_density = 0.0001
+fog_sky_affect = 0.386
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_xrivr"]
 vertices = PackedVector3Array(-8.75, 1, 8, -7.25, 1, 8, -1.5, 1, 2.25, -1.5, 1, -0.5, -19.5, 1, 9, -9, 1, 9, 0.25, 1, -19.5, -19.5, 1, -19.5, 0.25, 1, -0.75, 1.5, 1, -0.75, 1.75, 1.25, 0.75, 19.5, 1, 0.75, 19.5, 1, -19.5, -0.5, 3, 0.25, -0.5, 3, 1.5, 0.75, 3, 1.5, 0.75, 3, 0.25, -7, 1, 9.75, 1.5, 1, 2.5, -8, 1, 10, -8, 1, 19.5, 19.5, 1, 19.5, -9, 1, 9.75, -19.5, 1, 19.5)
@@ -86,9 +93,11 @@ shape = SubResource("BoxShape3D_13qdw")
 mesh = SubResource("BoxMesh_njqwk")
 surface_material_override/0 = SubResource("StandardMaterial3D_7f2x3")
 
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=2103130682]
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=2103130682 node_paths=PackedStringArray("world_environment")]
 transform = Transform3D(1, 0, 0, 0, 0.7421844, -0.67019576, 0, 0.67019576, 0.7421844, 0, 0.058, -0.964)
 script = ExtResource("1_1rplp")
+world_environment = NodePath("../WorldEnvironment")
+sky_material = SubResource("ProceduralSkyMaterial_njqwk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=975973988]
 environment = SubResource("Environment_13qdw")
@@ -128,7 +137,7 @@ shape = SubResource("BoxShape3D_b1lj4")
 mesh = SubResource("BoxMesh_gb1m8")
 
 [node name="WoodResource" parent="NavigationRegion3D" unique_id=751302924 instance=ExtResource("6_1rplp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.717, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3.4256282, 9)
 
 [node name="Object2" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=231425026]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5734754, 0, 0)
