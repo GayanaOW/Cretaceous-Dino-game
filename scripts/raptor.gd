@@ -86,6 +86,8 @@ func _update_state(distance: float, delta: float) -> void:
 			if distance > ATTACK_RANGE:
 				current_state = State.CHASE
 
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+
 func _act_on_state(distance: float, delta: float) -> void:
 	match current_state:
 		State.IDLE, State.ALERT:
@@ -93,7 +95,10 @@ func _act_on_state(distance: float, delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, CHASE_SPEED)
 
 		State.CHASE:
-			var direction = (player.global_position - global_position)
+			nav_agent.target_position = player.global_position
+			var next_path_position = nav_agent.get_next_path_position()
+			print("state: CHASE, next_path_pos: ", next_path_position, " my_pos: ", global_position)  # DEBUG
+			var direction = (next_path_position - global_position)
 			direction.y = 0
 			direction = direction.normalized()
 			velocity.x = direction.x * CHASE_SPEED
