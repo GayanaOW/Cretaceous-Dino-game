@@ -95,6 +95,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7f2x3")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=2103130682 node_paths=PackedStringArray("world_environment")]
 transform = Transform3D(1, 0, 0, 0, 0.7421844, -0.67019576, 0, 0.67019576, 0.7421844, 0, 0.058, -0.964)
+shadow_enabled = true
 script = ExtResource("1_1rplp")
 world_environment = NodePath("../WorldEnvironment")
 sky_material = SubResource("ProceduralSkyMaterial_njqwk")
