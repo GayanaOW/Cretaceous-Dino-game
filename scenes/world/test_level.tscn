@@ -8,6 +8,11 @@
 [ext_resource type="Script" uid="uid://l7dedjhiu1en" path="res://scripts/inventory.gd" id="3_32mv2"]
 [ext_resource type="PackedScene" uid="uid://bdewswpy83re1" path="res://scenes/world/wood_resource.tscn" id="6_1rplp"]
 [ext_resource type="PackedScene" uid="uid://c0m6uusuvgxdn" path="res://scenes/ui/hud.tscn" id="8_gb1m8"]
+[ext_resource type="Texture2D" uid="uid://c70tahjlufsex" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_disp_4k.png" id="11_vu5l7"]
+[ext_resource type="Texture2D" uid="uid://dlica1yia68ep" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_diffuse_4k.jpg" id="13_jm38g"]
+[ext_resource type="Texture2D" uid="uid://dqot8sjhbnkav" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_ao_4k.png" id="14_jkqtj"]
+[ext_resource type="Texture2D" uid="uid://bilsw3kb55apy" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_nor_gl_4k.png" id="15_j4mhe"]
+[ext_resource type="Texture2D" uid="uid://x4kgybwtfwcc" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_rough_4k.png" id="16_0bao4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
 
@@ -51,11 +56,26 @@ size = Vector3(1.5, 1.5, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(40, 1, 40)
 
-[sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
-size = Vector3(40, 1, 40)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oe5hj"]
+albedo_texture = ExtResource("13_jm38g")
+roughness_texture = ExtResource("16_0bao4")
+normal_enabled = true
+normal_scale = 3.0
+normal_texture = ExtResource("15_j4mhe")
+ao_enabled = true
+ao_light_affect = 0.1
+ao_texture = ExtResource("14_jkqtj")
+heightmap_enabled = true
+heightmap_scale = 6.61
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("11_vu5l7")
+uv1_scale = Vector3(20, 20, 20)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi6ju"]
-albedo_color = Color(0.22352941, 0.38431373, 0, 0.42352942)
+[sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
+material = SubResource("StandardMaterial3D_oe5hj")
+size = Vector3(40, 1, 40)
 
 [node name="TestLevel" type="Node3D" unique_id=1376114856]
 
@@ -151,6 +171,5 @@ shape = SubResource("BoxShape3D_xrivr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1204001129]
 mesh = SubResource("BoxMesh_xrivr")
-surface_material_override/0 = SubResource("StandardMaterial3D_wi6ju")
 
 [editable path="NavigationRegion3D/WoodResource"]
