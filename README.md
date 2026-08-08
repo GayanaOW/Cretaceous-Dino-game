@@ -67,7 +67,9 @@ dino-game/
 │   └── ui/               # hud.tscn
 ├── scripts/
 └── addons/
-```text
+text```
+
+
 ---
 Scenes are saved in **text format** so Git diffs/merges stay readable — please don't change this setting.
 
