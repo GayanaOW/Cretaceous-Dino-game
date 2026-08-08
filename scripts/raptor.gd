@@ -25,12 +25,10 @@ var has_alerted_pack: bool = false  # NEW: so we only shout once per detection, 
 
 func _ready():
 	player = get_tree().get_root().find_child("Player", true, false)
-	add_to_group("raptors")  # NEW: joins the "raptors" group so others can find it
-
-	# NEW: connect to every other raptor's signal, so when THEY spot the player, this one reacts too
+	add_to_group("raptors")
 	call_deferred("_connect_to_pack")
-	
 	health.depleted.connect(_on_raptor_defeated)
+	anim_player.speed_scale = 6.0  # NEW — tune this value until it looks right
 
 func _on_raptor_defeated():
 	queue_free()  # simplest MVP behavior: raptor disappears when defeated
@@ -87,6 +85,7 @@ func _update_state(distance: float, delta: float) -> void:
 				current_state = State.CHASE
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var anim_player: AnimationPlayer = $velociraptor_latest_1/AnimationPlayer
 
 func _act_on_state(distance: float, delta: float) -> void:
 	match current_state:
@@ -95,13 +94,17 @@ func _act_on_state(distance: float, delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, CHASE_SPEED)
 
 		State.CHASE:
-			nav_agent.target_position = player.global_position
-			var next_path_position = nav_agent.get_next_path_position()
-			var direction = (next_path_position - global_position)
+			anim_player.play("RUN")
+			var direction = (player.global_position - global_position)
 			direction.y = 0
 			direction = direction.normalized()
 			velocity.x = direction.x * CHASE_SPEED
 			velocity.z = direction.z * CHASE_SPEED
+
+			# NEW: rotate to face movement direction
+			if direction.length() > 0.01:
+				var target_rotation = atan2(direction.x, direction.z)
+				rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
 
 		State.ATTACK:
 			velocity.x = 0
