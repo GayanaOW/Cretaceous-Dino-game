@@ -1,3 +1,4 @@
+```markdown
 # Dinosaur Survival Game
 
 A long-term dinosaur survival game inspired by *7 Days to Die* — dinosaurs instead of zombies. You and your friends wake up as dinosaurs from a park have escaped into the world, and you have to craft, build, and survive. Built as an open-source portfolio project by a team of first-time game developers, using Godot.
@@ -67,36 +68,29 @@ dino-game/
 │   └── ui/               # hud.tscn
 ├── scripts/
 └── addons/
-text```
+Scenes are saved in text format so Git diffs/merges stay readable — please don't change this setting.
 
+Note: Instanced scenes (e.g. WoodResource inside test_level.tscn) hide their internal children by default in the Scene panel. Right-click the instance → "Editable Children" to view/edit them.
 
----
-Scenes are saved in **text format** so Git diffs/merges stay readable — please don't change this setting.
+Coding Conventions
+Tunable values: Place in const at the top of scripts, not inline magic numbers.
 
-**Note:** Instanced scenes (e.g. `WoodResource` inside `test_level.tscn`) hide their internal children by default in the Scene panel. Right-click the instance → **"Editable Children"** to view/edit them.
+State machines: Use GDScript enum + match (see raptor.gd).
 
----
+Shared behavior: Build as a reusable component node (Health, Inventory) — follow this pattern for anything new that multiple entities need.
 
-## Coding Conventions
+Cross-node references: Use @export typed slots + drag-and-drop in the Inspector, not hardcoded get_node("/root/...") paths.
 
-- **Tunable values:** Place in `const` at the top of scripts, not inline magic numbers.
-- **State machines:** Use GDScript `enum` + `match` (see `raptor.gd`).
-- **Shared behavior:** Build as a reusable component node (`Health`, `Inventory`) — follow this pattern for anything new that multiple entities need.
-- **Cross-node references:** Use `@export` typed slots + drag-and-drop in the Inspector, not hardcoded `get_node("/root/...")` paths.
-- **Clean commits:** Remove debug `print()` statements before committing.
-- **Commit frequency:** Commit after each completed piece of work, not just at the end of a sprint.
+Clean commits: Remove debug print() statements before committing.
 
----
+Commit frequency: Commit after each completed piece of work, not just at the end of a sprint.
 
-## Credits & Asset Licenses
+Credits & Asset Licenses
+Raptor model: Custom-modeled, shaded, and rigged in Blender by the team.
 
-- **Raptor model:** Custom-modeled, shaded, and rigged in Blender by the team.
-- **Ground texture (rocky terrain):** [Poly Haven](https://polyhaven.com) — CC0
-- **Tree models:** [gltf-trees.donmccurdy.com](https://gltf-trees.donmccurdy.com), [florasynth.com](https://www.florasynth.com) — *(confirm and fill in specific license terms here before public release)*
+Ground texture (rocky terrain): Poly Haven — CC0
 
----
+Tree models: gltf-trees.donmccurdy.com, florasynth.com — (confirm and fill in specific license terms here before public release)
 
-## Currently Out of Scope
-
+Currently Out of Scope
 Base building, multiple dinosaur species, procedural world generation, multiplayer, save/load, hunger/stamina/thirst systems, complex crafting trees.
----
