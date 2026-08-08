@@ -67,8 +67,8 @@ dino-game/
 │   └── ui/               # hud.tscn
 ├── scripts/
 └── addons/
-
-
+```text
+---
 Scenes are saved in **text format** so Git diffs/merges stay readable — please don't change this setting.
 
 **Note:** Instanced scenes (e.g. `WoodResource` inside `test_level.tscn`) hide their internal children by default in the Scene panel. Right-click the instance → **"Editable Children"** to view/edit them.
@@ -97,3 +97,4 @@ Scenes are saved in **text format** so Git diffs/merges stay readable — please
 ## Currently Out of Scope
 
 Base building, multiple dinosaur species, procedural world generation, multiplayer, save/load, hunger/stamina/thirst systems, complex crafting trees.
+---
