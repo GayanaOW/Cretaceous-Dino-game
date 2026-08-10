@@ -17,7 +17,7 @@ You and your friends wake up as dinosaurs from a park have escaped into the worl
 
 ## 📋 Status
 
-**MVP complete** currently in a Phase 2 polish pass (graphics, HUD, animated raptor model).
+**MVP complete**, currently in a Phase 2 polish pass (graphics, HUD, animated raptor model).
 
 | | Feature |
 |:---:|---|
