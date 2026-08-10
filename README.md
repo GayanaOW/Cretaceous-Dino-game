@@ -46,7 +46,7 @@ You and your friends wake up as dinosaurs from a park have escaped into the worl
 
 ## 🚀 Getting Started
 
-1. Install **Godot 4.7.1 stable** — Standard build (not .NET/Mono)
+1. Install **Godot 4.7.1 stable** Standard build (not .NET/Mono)
 2. Clone this repo
 3. Godot → **Import** (not "New Project") → select the cloned folder
 4. Open and run `scenes/world/test_level.tscn` (<kbd>F6</kbd>)
