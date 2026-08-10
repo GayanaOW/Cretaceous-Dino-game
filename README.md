@@ -2,7 +2,7 @@
 
 # 🦖 Dinosaur Survival Game
 
-*A long-term survival game inspired by 7 Days to Die — dinosaurs instead of zombies.*
+*A long-term mission driven survival and crafting dinosaur game.*
 
 You and your friends wake up as dinosaurs from a park have escaped into the world. Craft, build, and survive.
 
