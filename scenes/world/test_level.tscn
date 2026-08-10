@@ -179,3 +179,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6357675, 0.8776586, 14.563
 script = ExtResource("15_if2po")
 
 [editable path="NavigationRegion3D/WoodResource"]
+[editable path="FiberBush"]

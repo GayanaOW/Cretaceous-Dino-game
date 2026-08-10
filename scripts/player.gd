@@ -96,8 +96,9 @@ func _try_interact():
 		if hit_object.has_method("gather"):
 			var amount = await hit_object.gather()
 			if amount > 0:
-				inventory.add_item("wood", amount)
-				print("Gathered wood! Total: ", inventory.get_count("wood"))
+				var item_name = hit_object.ITEM_NAME
+				inventory.add_item(item_name, amount)
+				print("Gathered ", item_name, "! Total: ", inventory.get_count(item_name))
 		
 func _try_attack():
 	var space_state = get_world_3d().direct_space_state

@@ -1,5 +1,7 @@
 extends StaticBody3D
 
+const ITEM_NAME = "wood"
+
 const WOOD_AMOUNT = 3  # how much wood one gather gives
 const GATHER_COOLDOWN = 1.5  # seconds before this node can be gathered again
 

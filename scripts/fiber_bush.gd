@@ -1,5 +1,7 @@
 extends StaticBody3D
 
+const ITEM_NAME = "fiber"
+
 const FIBER_AMOUNT = 2
 const GATHER_COOLDOWN = 3.0  # slightly longer than wood, fiber is a bit more precious
 
