@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bonqedsnhgqaw" path="res://scripts/hud.gd" id="1_0mwgc"]
 [ext_resource type="Texture2D" uid="uid://c5cd3veiricmf" path="res://assets/textures/wood-beam.svg" id="2_hqnrr"]
+[ext_resource type="Texture2D" uid="uid://dt2g2ta3h116u" path="res://assets/textures/plant_fiber_icon.png" id="3_bo48s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k461a"]
 bg_color = Color(0.16470589, 0.16470589, 0.16470589, 1)
@@ -29,9 +30,12 @@ corner_detail = 5
 
 [node name="HUD" type="Control" unique_id=364059218]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_0mwgc")
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=1911993212]
@@ -49,10 +53,11 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1114.0
-offset_bottom = 12.0
+offset_right = 2.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.5, 0, 0, 0)
 
 [node name="WoodSlot" type="PanelContainer" parent="." unique_id=747653483]
@@ -76,3 +81,42 @@ stretch_mode = 5
 
 [node name="WoodCountLabel" type="Label" parent="WoodSlot" unique_id=1925245526]
 layout_mode = 2
+
+[node name="FiberSlot" type="PanelContainer" parent="." unique_id=1654350278]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 118.0
+offset_top = 555.0
+offset_right = 182.0
+offset_bottom = 619.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="CenterContainer" type="CenterContainer" parent="FiberSlot" unique_id=445716070]
+layout_mode = 2
+
+[node name="WoodIcon" type="TextureRect" parent="FiberSlot/CenterContainer" unique_id=529329089]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_bo48s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FiberCountLabel" type="Label" parent="FiberSlot" unique_id=1986674472]
+layout_mode = 2
+
+[node name="Crosshair" type="Label" parent="." unique_id=1179882947]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -10.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -7,6 +7,9 @@ const MOUSE_SENSITIVITY = 0.003
 const ATTACK_DAMAGE = 25.0
 const ATTACK_RANGE = 2.5
 
+const BANDAGE_FIBER_COST = 3
+const BANDAGE_HEAL_AMOUNT = 30.0
+
 const KNOCKOUT_DURATION = 3.0
 const RECOVERY_HEALTH = 50.0
 
@@ -44,6 +47,22 @@ func _on_knocked_out():
 	is_knocked_out = false
 	recovered.emit()
 	
+	
+func _try_craft_bandage():
+	if inventory.remove_item("fiber", BANDAGE_FIBER_COST):
+		inventory.add_item("bandage", 1)
+		print("Crafted a bandage!")
+	else:
+		print("Not enough fiber — need ", BANDAGE_FIBER_COST)
+
+func _try_use_bandage():
+	if inventory.remove_item("bandage", 1):
+		health.heal(BANDAGE_HEAL_AMOUNT)
+		print("Used a bandage, healed ", BANDAGE_HEAL_AMOUNT)
+	else:
+		print("No bandages to use")
+	
+	
 func _unhandled_input(event):
 	if is_knocked_out:
 		return
@@ -57,6 +76,10 @@ func _unhandled_input(event):
 		_try_interact()
 	elif event.is_action_pressed("craft_spear"):
 		_try_craft_spear()
+	elif event.is_action_pressed("craft_bandage"):
+		_try_craft_bandage()
+	elif event.is_action_pressed("use_bandage"):
+		_try_use_bandage()
 
 func _try_interact():
 	var space_state = get_world_3d().direct_space_state
@@ -73,8 +96,9 @@ func _try_interact():
 		if hit_object.has_method("gather"):
 			var amount = await hit_object.gather()
 			if amount > 0:
-				inventory.add_item("wood", amount)
-				print("Gathered wood! Total: ", inventory.get_count("wood"))
+				var item_name = hit_object.ITEM_NAME
+				inventory.add_item(item_name, amount)
+				print("Gathered ", item_name, "! Total: ", inventory.get_count(item_name))
 		
 func _try_attack():
 	var space_state = get_world_3d().direct_space_state

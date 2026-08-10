@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bmukdw53prx73"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xrivr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1lj4"]
+albedo_color = Color(0.2901961, 0.5411765, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_13qdw"]
+material = SubResource("StandardMaterial3D_b1lj4")
+
+[node name="FiberBush" type="StaticBody3D" unique_id=1263869856]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=616991986]
+shape = SubResource("SphereShape3D_xrivr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=214435370]
+mesh = SubResource("SphereMesh_13qdw")

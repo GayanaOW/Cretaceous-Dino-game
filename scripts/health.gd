@@ -2,6 +2,7 @@ extends Node
 class_name Health
 
 signal damaged(amount: float, current: float)
+signal healed(amount: float, current: float)
 signal depleted  # fires when health hits 0
 
 @export var max_health: float = 100.0
@@ -19,6 +20,7 @@ func take_damage(amount: float) -> void:
 
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)
+	healed.emit(amount, current_health)
 
 func reset() -> void:
 	current_health = max_health
