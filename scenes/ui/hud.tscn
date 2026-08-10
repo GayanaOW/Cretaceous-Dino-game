@@ -76,3 +76,10 @@ stretch_mode = 5
 
 [node name="WoodCountLabel" type="Label" parent="WoodSlot" unique_id=1925245526]
 layout_mode = 2
+
+[node name="Crosshair" type="Label" parent="." unique_id=1179882947]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 23.0
+text = "+"
+horizontal_alignment = 1

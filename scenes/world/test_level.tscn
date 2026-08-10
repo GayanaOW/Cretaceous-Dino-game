@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://c70tahjlufsex" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_disp_4k.png" id="11_vu5l7"]
 [ext_resource type="Texture2D" uid="uid://dlica1yia68ep" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_diffuse_4k.jpg" id="13_jm38g"]
 [ext_resource type="Texture2D" uid="uid://dqot8sjhbnkav" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_ao_4k.png" id="14_jkqtj"]
+[ext_resource type="PackedScene" uid="uid://bmukdw53prx73" path="res://scenes/world/fiber_bush.tscn" id="14_vxh3r"]
+[ext_resource type="Script" uid="uid://crlgj4mjtspv8" path="res://scripts/fiber_bush.gd" id="15_if2po"]
 [ext_resource type="Texture2D" uid="uid://bilsw3kb55apy" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_nor_gl_4k.png" id="15_j4mhe"]
 [ext_resource type="Texture2D" uid="uid://x4kgybwtfwcc" path="res://assets/textures/forest_leaves_02_4k/forest_leaves_02_rough_4k.png" id="16_0bao4"]
 
@@ -171,5 +173,9 @@ shape = SubResource("BoxShape3D_xrivr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1204001129]
 mesh = SubResource("BoxMesh_xrivr")
+
+[node name="FiberBush" parent="." unique_id=1263869856 instance=ExtResource("14_vxh3r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6357675, 0.8776586, 14.563945)
+script = ExtResource("15_if2po")
 
 [editable path="NavigationRegion3D/WoodResource"]
