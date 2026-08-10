@@ -24,7 +24,7 @@ You and your friends wake up as dinosaurs from a park have escaped into the worl
 | ✅ | First-person movement, camera, jump |
 | ✅ | Raptor AI : state machine, pack-alert via signals, NavigationAgent3D pathfinding |
 | ✅ | Combat : player/raptor attacks, reusable `Health` component |
-| ✅ | Knockout system (no death — brief loss of control, then recovery) |
+| ✅ | Knockout system (no death, brief loss of control, then recovery) |
 | ✅ | Gather/craft loop : wood → spear, reusable `Inventory` component |
 | ✅ | Dynamic day/night : sun, sky, fog, glow, shadows, all in sync |
 | ✅ | Styled HUD : health bar, knockout overlay, wood counter slot |
