@@ -89,7 +89,7 @@ dino-game/
 └── addons/
 ```
 
-> Scenes are saved in **text format** so Git diffs/merges stay readable — please don't change this setting.
+> Scenes are saved in **text format** so Git diffs/merges stay readable, please don't change this setting.
 >
 > **Gotcha:** instanced scenes (e.g. `WoodResource` inside `test_level.tscn`) hide their internal children by default. Right-click the instance → **Editable Children** to view/edit them.
 
@@ -99,7 +99,7 @@ dino-game/
 
 - Tunable values go in `const` at the top of scripts — no inline magic numbers
 - State machines use GDScript `enum` + `match` *(see `raptor.gd`)*
-- Shared behavior is a reusable component node (`Health`, `Inventory`) — follow this pattern for anything new
+- Shared behavior is a reusable component node (`Health`, `Inventory`) : follow this pattern for anything new
 - Cross-node references use `@export` typed slots + drag-and-drop in the Inspector, **not** hardcoded `get_node("/root/...")` paths
 - Remove debug `print()` statements before committing
 - Commit after each completed piece of work, not just at sprint end
