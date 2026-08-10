@@ -22,14 +22,14 @@ You and your friends wake up as dinosaurs from a park have escaped into the worl
 | | Feature |
 |:---:|---|
 | ✅ | First-person movement, camera, jump |
-| ✅ | Raptor AI — state machine, pack-alert via signals, NavigationAgent3D pathfinding |
-| ✅ | Combat — player/raptor attacks, reusable `Health` component |
+| ✅ | Raptor AI : state machine, pack-alert via signals, NavigationAgent3D pathfinding |
+| ✅ | Combat : player/raptor attacks, reusable `Health` component |
 | ✅ | Knockout system (no death — brief loss of control, then recovery) |
-| ✅ | Gather/craft loop — wood → spear, reusable `Inventory` component |
-| ✅ | Dynamic day/night — sun, sky, fog, glow, shadows, all in sync |
-| ✅ | Styled HUD — health bar, knockout overlay, wood counter slot |
+| ✅ | Gather/craft loop : wood → spear, reusable `Inventory` component |
+| ✅ | Dynamic day/night : sun, sky, fog, glow, shadows, all in sync |
+| ✅ | Styled HUD : health bar, knockout overlay, wood counter slot |
 | ✅ | Visible weapon with procedural swing animation |
-| ✅ | Rigged, animated raptor model — custom-built in Blender |
+| ✅ | Rigged, animated raptor model : custom-built in Blender |
 | 🚧 | More raptor animations (idle, attack), base-building groundwork, more craftables |
 
 ---
@@ -51,7 +51,7 @@ You and your friends wake up as dinosaurs from a park have escaped into the worl
 3. Godot → **Import** (not "New Project") → select the cloned folder
 4. Open and run `scenes/world/test_level.tscn` (<kbd>F6</kbd>)
 
-> ⚠️ **Stick to Godot 4.7.1 stable** across the whole team — don't upgrade without a team discussion, since project files can behave unpredictably across version jumps.
+> ⚠️ **Stick to Godot 4.7.1 stable** across the whole team, don't upgrade without a team discussion, since project files can behave unpredictably across version jumps.
 
 ---
 
