@@ -97,7 +97,7 @@ dino-game/
 
 ## ✍️ Coding Conventions
 
-- Tunable values go in `const` at the top of scripts — no inline magic numbers
+- Tunable values go in `const` at the top of scripts : no inline magic numbers
 - State machines use GDScript `enum` + `match` *(see `raptor.gd`)*
 - Shared behavior is a reusable component node (`Health`, `Inventory`) : follow this pattern for anything new
 - Cross-node references use `@export` typed slots + drag-and-drop in the Inspector, **not** hardcoded `get_node("/root/...")` paths
@@ -110,7 +110,7 @@ dino-game/
 
 | Asset | Source | License |
 |---|---|---|
-| Raptor model | Custom — modeled, shaded & rigged in Blender by the team | Original work |
+| Raptor model | Custom : modeled, shaded & rigged in Blender by the team | Original work |
 | Ground texture (rocky terrain) | [Poly Haven](https://polyhaven.com) | CC0 |
 | Tree models | [gltf-trees.donmccurdy.com](https://gltf-trees.donmccurdy.com), [florasynth.com](https://www.florasynth.com) | ⚠️ *confirm before public release* |
 
