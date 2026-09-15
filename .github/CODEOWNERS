@@ -1,0 +1,8 @@
+#Default owner for anything not matched below
+*                                @GayanaOW
+
+#Game code
+/.godot/                            @GayanaOW
+/assets/                            @GayanaOW
+/scenes/                            @GayanaOW
+/scripts/                           @GayanaOW
