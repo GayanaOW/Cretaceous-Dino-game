@@ -2,10 +2,12 @@ extends CharacterBody3D
 
 enum State { IDLE, ALERT, CHASE, ATTACK }
 
+const IDLE_VARIATIONS = ["IDLE_lookaround", "IDLE_sniff", "ROAR"]
+
 const CHASE_SPEED = 4.0
 const DETECTION_RADIUS = 10.0
 const ATTACK_RANGE = 1.5
-const ALERT_DURATION = 0.5
+const ALERT_DURATION = 0.9
 const PACK_ALERT_RADIUS = 15.0  # NEW: how far the "I see you!" call reaches
 
 const ATTACK_DAMAGE = 10.0
@@ -43,6 +45,7 @@ func _ready():
 	#anim_player.speed_scale = 6.0  # NEW — tune this value until it looks right
 	spawn_position = global_position
 	idle_pause_timer = randf_range(IDLE_PAUSE_MIN, IDLE_PAUSE_MAX)
+	
 
 func _on_raptor_defeated():
 	queue_free()  # simplest MVP behavior: raptor disappears when defeated
@@ -81,8 +84,10 @@ func _update_state(distance: float, delta: float) -> void:
 		State.ALERT:
 			alert_timer += delta
 			if not has_alerted_pack:
-				spotted_player.emit(global_position)  # NEW: tell the pack
+				spotted_player.emit(global_position)
 				has_alerted_pack = true
+				anim_player.speed_scale = 1.0
+				anim_player.play("ROAR")
 			if alert_timer >= ALERT_DURATION:
 				current_state = State.CHASE
 			
@@ -109,7 +114,8 @@ func _act_on_state(distance: float, delta: float) -> void:
 		State.ALERT:
 			velocity.x = move_toward(velocity.x, 0, CHASE_SPEED)
 			velocity.z = move_toward(velocity.z, 0, CHASE_SPEED)
-			anim_player.speed_scale = 0.0  # freeze mid-pose, alert is a brief pause
+			# no anim_player line here — let ROAR play uninterrupted
+			#anim_player.speed_scale = 0.0  # freeze mid-pose, alert is a brief pause
 
 		State.CHASE:
 			anim_player.speed_scale = CHASE_ANIM_SPEED_SCALE
@@ -131,16 +137,24 @@ func _act_on_state(distance: float, delta: float) -> void:
 				_attack_player()
 				attack_timer = ATTACK_COOLDOWN
 				
+
+var is_playing_variation: bool = false
+
 func _idle_wander(delta: float) -> void:
 	if is_wandering_paused:
 		velocity.x = move_toward(velocity.x, 0, WANDER_SPEED)
 		velocity.z = move_toward(velocity.z, 0, WANDER_SPEED)
-		anim_player.speed_scale = 0.0  # frozen pose while paused/"looking around"
+
+		if is_playing_variation:
+			if not anim_player.is_playing():
+				is_playing_variation = false
+				_pick_new_wander_target()
+			return
 
 		idle_pause_timer -= delta
 		if idle_pause_timer <= 0.0:
-			_look_around()
-			_pick_new_wander_target()
+			if not _maybe_play_idle_variation():
+				_pick_new_wander_target()
 	else:
 		var next_path_position = nav_agent.get_next_path_position()
 		var direction = (next_path_position - global_position)
@@ -150,6 +164,7 @@ func _idle_wander(delta: float) -> void:
 		if distance_to_target < 0.5:
 			is_wandering_paused = true
 			idle_pause_timer = randf_range(IDLE_PAUSE_MIN, IDLE_PAUSE_MAX)
+			anim_player.stop()
 		else:
 			direction = direction.normalized()
 			velocity.x = direction.x * WANDER_SPEED
@@ -159,6 +174,17 @@ func _idle_wander(delta: float) -> void:
 
 			var target_rotation = atan2(direction.x, direction.z)
 			rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
+
+func _maybe_play_idle_variation() -> bool:
+	var roll = randf()
+	if roll < 0.5:
+		var clip = IDLE_VARIATIONS[randi() % IDLE_VARIATIONS.size()]
+		anim_player.speed_scale = 1.0
+		anim_player.play(clip)
+		is_playing_variation = true
+		return true
+	return false
+		
 
 func _pick_new_wander_target() -> void:
 	var random_angle = randf() * TAU
