@@ -2,14 +2,28 @@ extends CharacterBody3D
 
 enum State { IDLE, ALERT, CHASE, ATTACK }
 
+const IDLE_VARIATIONS = ["IDLE_lookaround", "IDLE_sniff", "ROAR"]
+
 const CHASE_SPEED = 4.0
 const DETECTION_RADIUS = 10.0
 const ATTACK_RANGE = 1.5
-const ALERT_DURATION = 0.5
+const ALERT_DURATION = 0.9
 const PACK_ALERT_RADIUS = 15.0  # NEW: how far the "I see you!" call reaches
 
 const ATTACK_DAMAGE = 10.0
 const ATTACK_COOLDOWN = 1.0  # seconds between hits
+
+const WANDER_RADIUS = 8.0
+const WANDER_SPEED = 0.8
+const IDLE_PAUSE_MIN = 2.0
+const IDLE_PAUSE_MAX = 5.0
+const CHASE_ANIM_SPEED_SCALE = 2.8
+const WANDER_ANIM_SPEED_SCALE = 1.2
+
+var spawn_position: Vector3
+var wander_target: Vector3
+var is_wandering_paused: bool = true
+var idle_pause_timer: float = 0.0
 
 var attack_timer: float = 0.0
 
@@ -28,7 +42,10 @@ func _ready():
 	add_to_group("raptors")
 	call_deferred("_connect_to_pack")
 	health.depleted.connect(_on_raptor_defeated)
-	anim_player.speed_scale = 6.0  # NEW — tune this value until it looks right
+	#anim_player.speed_scale = 6.0  # NEW — tune this value until it looks right
+	spawn_position = global_position
+	idle_pause_timer = randf_range(IDLE_PAUSE_MIN, IDLE_PAUSE_MAX)
+	
 
 func _on_raptor_defeated():
 	queue_free()  # simplest MVP behavior: raptor disappears when defeated
@@ -67,8 +84,10 @@ func _update_state(distance: float, delta: float) -> void:
 		State.ALERT:
 			alert_timer += delta
 			if not has_alerted_pack:
-				spotted_player.emit(global_position)  # NEW: tell the pack
+				spotted_player.emit(global_position)
 				has_alerted_pack = true
+				anim_player.speed_scale = 1.0
+				anim_player.play("ROAR")
 			if alert_timer >= ALERT_DURATION:
 				current_state = State.CHASE
 			
@@ -89,19 +108,23 @@ func _update_state(distance: float, delta: float) -> void:
 
 func _act_on_state(distance: float, delta: float) -> void:
 	match current_state:
-		State.IDLE, State.ALERT:
+		State.IDLE:
+			_idle_wander(delta)
+
+		State.ALERT:
 			velocity.x = move_toward(velocity.x, 0, CHASE_SPEED)
 			velocity.z = move_toward(velocity.z, 0, CHASE_SPEED)
+			# no anim_player line here — let ROAR play uninterrupted
+			#anim_player.speed_scale = 0.0  # freeze mid-pose, alert is a brief pause
 
 		State.CHASE:
+			anim_player.speed_scale = CHASE_ANIM_SPEED_SCALE
 			anim_player.play("RUN")
 			var direction = (player.global_position - global_position)
 			direction.y = 0
 			direction = direction.normalized()
 			velocity.x = direction.x * CHASE_SPEED
 			velocity.z = direction.z * CHASE_SPEED
-
-			# NEW: rotate to face movement direction
 			if direction.length() > 0.01:
 				var target_rotation = atan2(direction.x, direction.z)
 				rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
@@ -113,6 +136,70 @@ func _act_on_state(distance: float, delta: float) -> void:
 			if attack_timer <= 0.0:
 				_attack_player()
 				attack_timer = ATTACK_COOLDOWN
+				
+
+var is_playing_variation: bool = false
+
+func _idle_wander(delta: float) -> void:
+	if is_wandering_paused:
+		velocity.x = move_toward(velocity.x, 0, WANDER_SPEED)
+		velocity.z = move_toward(velocity.z, 0, WANDER_SPEED)
+
+		if is_playing_variation:
+			if not anim_player.is_playing():
+				is_playing_variation = false
+				_pick_new_wander_target()
+			return
+
+		idle_pause_timer -= delta
+		if idle_pause_timer <= 0.0:
+			if not _maybe_play_idle_variation():
+				_pick_new_wander_target()
+	else:
+		var next_path_position = nav_agent.get_next_path_position()
+		var direction = (next_path_position - global_position)
+		direction.y = 0
+		var distance_to_target = direction.length()
+
+		if distance_to_target < 0.5:
+			is_wandering_paused = true
+			idle_pause_timer = randf_range(IDLE_PAUSE_MIN, IDLE_PAUSE_MAX)
+			anim_player.stop()
+		else:
+			direction = direction.normalized()
+			velocity.x = direction.x * WANDER_SPEED
+			velocity.z = direction.z * WANDER_SPEED
+			anim_player.speed_scale = WANDER_ANIM_SPEED_SCALE
+			anim_player.play("RUN")
+
+			var target_rotation = atan2(direction.x, direction.z)
+			rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
+
+func _maybe_play_idle_variation() -> bool:
+	var roll = randf()
+	if roll < 0.5:
+		var clip = IDLE_VARIATIONS[randi() % IDLE_VARIATIONS.size()]
+		anim_player.speed_scale = 1.0
+		anim_player.play(clip)
+		is_playing_variation = true
+		return true
+	return false
+		
+
+func _pick_new_wander_target() -> void:
+	var random_angle = randf() * TAU
+	var random_radius = randf() * WANDER_RADIUS
+	var random_point = spawn_position + Vector3(cos(random_angle) * random_radius, 0, sin(random_angle) * random_radius)
+
+	var nav_map = nav_agent.get_navigation_map()
+	wander_target = NavigationServer3D.map_get_closest_point(nav_map, random_point)
+	nav_agent.target_position = wander_target
+	is_wandering_paused = false
+
+func _look_around() -> void:
+	var tween = create_tween()
+	var random_yaw = rotation.y + randf_range(-PI / 2, PI / 2)
+	tween.tween_property(self, "rotation:y", random_yaw, 1.0)
 
 func _attack_player() -> void:
 	var player_health = player.get_node_or_null("Health")
