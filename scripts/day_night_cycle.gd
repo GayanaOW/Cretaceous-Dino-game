@@ -26,7 +26,7 @@ func _process(delta):
 
 	var env = world_environment.environment
 	env.fog_light_color = lerp(Color(0.8, 0.8, 0.7), Color(0.15, 0.15, 0.3), night_fog_factor)
-	env.fog_density = lerp(0.0, 0.005, night_fog_factor)  # wider range, and now actually varies through the whole night
+	env.fog_density = lerp(0.0, 0.001, night_fog_factor)  # wider range, and now actually varies through the whole night
 	env.fog_sky_affect = 0.4
 	env.fog_aerial_perspective = 0.5
 	env.fog_light_energy = lerp(1.0, 2.5, night_fog_factor)  # boosts fog's own brightness so it's visible even when scene light is dim

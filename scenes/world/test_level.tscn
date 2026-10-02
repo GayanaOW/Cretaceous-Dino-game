@@ -206,7 +206,7 @@ transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_jkqtj")
 
 [node name="StarDome" type="MeshInstance3D" parent="." unique_id=382255569]
-transform = Transform3D(487.70175, -712.5447, -253.82404, 189.09052, 407.2707, -779.98413, 732.3875, 369.33783, 370.4023, 0, 0, 0)
+transform = Transform3D(379.3236, -554.20154, -197.4188, 147.07043, 316.7661, -606.65436, 569.6349, 287.2627, 288.09076, 0, 0, 0)
 mesh = SubResource("SphereMesh_13qdw")
 
 [editable path="NavigationRegion3D/WoodResource"]
