@@ -7,9 +7,11 @@ extends DirectionalLight3D
 const DAY_LENGTH = 120.0
 
 var time_elapsed: float = 0.0
+var player: Node3D = null
 
 func _process(delta):
 	time_elapsed += delta
+	player = get_tree().get_root().find_child("Player", true, false)
 	var cycle_progress = fmod(time_elapsed, DAY_LENGTH) / DAY_LENGTH
 
 	rotation_degrees.x = -cycle_progress * 360.0
@@ -35,6 +37,9 @@ func _process(delta):
 	env.glow_intensity = lerp(0.4, 0.9, dawn_dusk_factor)
 	
 	var star_material = star_dome.get_surface_override_material(0)
+	
+	if player and star_dome:
+		star_dome.global_position = player.global_position
 	
 	if star_material == null:
 		star_material = star_dome.mesh.surface_get_material(0)
